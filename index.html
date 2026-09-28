@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>منيو - تومة</title>
+<script>
+  /* تطبيق الثيم المحفوظ قبل رسم الصفحة (عشان مفيش وميض) */
+  (function(){
+    var t = null;
+    try { t = localStorage.getItem('theme'); } catch(e){}
+    if (!t) {
+      t = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
+    }
+    document.documentElement.setAttribute('data-theme', t);
+  })();
+</script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap');
+
+  /* ===== الوضع النهاري (نفس ألوانك) ===== */
+  :root, :root[data-theme="light"]{
+    --lime:#b9d92e;
+    --lime-dark:#abd31b;
+    --magenta:#9c1a6b;
+    --magenta-dark:#7a1554;
+    --ink:#241f1a;
+    --cream:#b308a4;
+    --card:#14e437;
+    --gold:#ff042e;
+
+    --hero-1:#b9d92e;
+    --hero-2:#abd31b;
+    --hero-title:#2b2200;
+    --hero-text:#33350f;
+    --nav-border:#e7e0cc;
+    --tab-bg:#fff;
+    --tab-text:#241f1a;
+    --tab-green-bg:#f2f9d6;
+    --tab-pink-bg:#fbeaf4;
+    --offer-name:#7a1554;
+    --offer-desc:#302d26;
+    --offer-was:#000000;
+    --offer-shadow:rgba(0,0,0,.7);
+    --zone-1:#9c1a6b;
+    --zone-2:#7a1554;
+    --footer-bg:#241f1a;
+    --footer-text:#f3efe2;
+    --toggle-bg:#241f1a;
+    --toggle-text:#fff;
+
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    box-sizing: border-box;
+  }
+
+  /* ===== الوضع الليلي ===== */
+  :root[data-theme="dark"]{
+    --cream:#1b1218;
+    --card:#2a2a1a;
+    --gold:#ff5a6e;
+
+    --hero-1:#5f7412;
+    --hero-2:#4a5c0e;
+    --hero-title:#f3efe2;
+    --hero-text:#e4e6c4;
+    --nav-border:#3a3225;
+    --tab-bg:#2a241c;
+    --tab-text:#f3efe2;
+    --tab-green-bg:#2f3a10;
+    --tab-pink-bg:#3d1230;
+    --offer-name:#f4c8e2;
+    --offer-desc:#d6d1c0;
+    --offer-was:#a9a390;
+    --offer-shadow:rgba(0,0,0,.6);
+    --zone-1:#4d0f36;
+    --zone-2:#33091f;
+    --footer-bg:#0e0b09;
+    --footer-text:#f3efe2;
+    --toggle-bg:#f3efe2;
+    --toggle-text:#241f1a;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-padding-top: env(safe-area-inset-top, 0px); scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:'Tajawal', sans-serif;
+    background:var(--cream);
+    color:var(--ink);
+    transition:background .3s ease, color .3s ease;
+  }
+
+  header.hero{
+    background:linear-gradient(160deg, var(--hero-1) 0%, var(--hero-2) 100%);
+    padding:2.2rem 1.2rem 3rem;
+    text-align:center;
+    position:relative;
+    overflow:hidden;
+    padding-top: calc(2.2rem + env(safe-area-inset-top, 0px));
+  }
+  header.hero::after{
+    content:"";
+    position:absolute;
+    bottom:-40px; left:50%;
+    transform:translateX(-50%);
+    width:120%;
+    height:80px;
+    background:var(--cream);
+    border-radius:50% 50% 0 0 / 100% 100% 0 0;
+  }
+  .badge{
+    width:84px;height:84px;border-radius:50%;
+    background:var(--gold);
+    color:#ffffff;
+    display:flex;align-items:center;justify-content:center;
+    font-weight:900;font-size:1.9rem;
+    margin:0 auto 0.8rem;
+    border:4px solid #fff;
+    box-shadow:0 6px 14px rgba(0,0,0,.2);
+  }
+  header.hero h1{
+    font-size:2.1rem;
+    margin:0 0 0.3rem;
+    font-weight:900;
+    color:var(--hero-title);
+  }
+  header.hero p{
+    margin:0;
+    font-weight:500;
+    color:var(--hero-text);
+    font-size:1rem;
+  }
+
+  nav.tabs{
+    position:sticky; top:0; z-index:20;
+    display:flex;
+    gap:.4rem;
+    padding:.6rem .8rem;
+    background:var(--cream);
+    overflow-x:auto;
+    border-bottom:1px solid var(--nav-border);
+    -webkit-overflow-scrolling:touch;
+  }
+  nav.tabs a{
+    flex:0 0 auto;
+    text-decoration:none;
+    color:var(--tab-text);
+    background:var(--tab-bg);
+    border:1px solid var(--nav-border);
+    padding:.5rem 1rem;
+    border-radius:999px;
+    font-size:.85rem;
+    font-weight:700;
+    white-space:nowrap;
+  }
+  nav.tabs a:nth-child(1){border-color:var(--lime-dark); background:var(--tab-green-bg);}
+  nav.tabs a:nth-child(n+2){border-color:var(--magenta); background:var(--tab-pink-bg);}
+
+  main{max-width:640px; margin:0 auto; padding:0 1rem 3rem;}
+
+  section{margin-top:2.4rem;}
+  section.savings{margin-top:-1.6rem;}
+
+  .section-title{
+    display:flex;
+    align-items:center;
+    gap:.6rem;
+    margin-bottom:1rem;
+  }
+  .section-title .bar{width:6px;height:1.5rem;border-radius:3px;}
+  .savings .bar{background:var(--lime-dark);}
+  .purple-zone .bar{background:var(--magenta);}
+  .section-title h2{font-size:1.35rem;margin:0;font-weight:900;}
+  .savings .section-title h2{color:#fff;}
+
+  .offer-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:.8rem;
+  }
+  .offer-card{
+    background:var(--card);
+    border-radius:18px;
+    padding:1rem .9rem;
+    box-shadow:0 3px 10px var(--offer-shadow);
+    border:2px solid var(--lime);
+    position:relative;
+  }
+  .offer-card .name{font-weight:900;font-size:1.05rem;color:var(--offer-name);}
+  .offer-card .desc{font-size:.82rem;color:var(--offer-desc);margin:.3rem 0 .6rem;line-height:1.5;}
+  .price-row{display:flex;align-items:baseline;gap:.5rem;}
+  .price-row .now{font-size:1.5rem;font-weight:900;color:var(--gold);}
+  .price-row .now sup{font-size:.7rem;}
+  .price-row .was{font-size:.85rem;color:var(--offer-was);text-decoration:line-through;}
+
+  .purple-zone{
+    background:linear-gradient(180deg, var(--zone-1) 0%, var(--zone-2) 100%);
+    border-radius:26px;
+    padding:1.6rem 1.1rem 2rem;
+    color:#fff;
+  }
+  .purple-zone .section-title h2{color:#fff;}
+  .purple-zone .bar{background:#f4c8e2;}
+
+  .menu-group{margin-bottom:1.6rem;}
+  .menu-group h3{
+    font-size:1.05rem;
+    margin:0 0 .6rem;
+    font-weight:700;
+    color:#f7d9ec;
+    border-bottom:1px dashed rgba(255,255,255,.35);
+    padding-bottom:.4rem;
+  }
+  .item-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:.55rem 0;
+    border-bottom:1px solid rgba(255, 255, 255, 0.452);
+    font-size:.95rem;
+  }
+  .item-row:last-child{border-bottom:none;}
+  .item-row .iname{font-weight:500;}
+  .item-row .iprice{font-weight:900; background:rgba(255, 255, 255, 0.15); padding:.15rem .6rem; border-radius:8px; font-size:.85rem; white-space:nowrap;}
+
+  footer{
+    text-align:center;
+    padding:2.2rem 1rem calc(2rem + env(safe-area-inset-bottom, 0px));
+    background:var(--footer-bg);
+    color:var(--footer-text);
+  }
+  footer .phone{
+    font-size:1.8rem;
+    font-weight:900;
+    letter-spacing:.05em;
+    color:var(--lime);
+    margin-bottom:.4rem;
+  }
+  footer .branches{
+    font-size:.85rem;
+    color:#cfc9b8;
+    line-height:1.9;
+    margin-top:.8rem;
+  }
+  footer .ig{
+    display:inline-block;
+    margin-top:.8rem;
+    font-size:.85rem;
+    color:#f4c8e2;
+  }
+
+  /* ===== زرار تبديل الوضع ===== */
+  .theme-toggle{
+    position:fixed;
+    left:14px;
+    bottom:calc(14px + env(safe-area-inset-bottom, 0px));
+    z-index:50;
+    width:52px;height:52px;
+    border-radius:50%;
+    border:2px solid #fff;
+    background:var(--toggle-bg);
+    color:var(--toggle-text);
+    font-size:1.5rem;
+    line-height:1;
+    cursor:pointer;
+    box-shadow:0 4px 14px rgba(0,0,0,.35);
+    display:flex;align-items:center;justify-content:center;
+    transition:transform .2s ease;
+  }
+  .theme-toggle:active{transform:scale(.9);}
+</style>
+</head>
+<body>
+
+<button class="theme-toggle" id="themeToggle" type="button" aria-label="تبديل الوضع الليلي والنهاري">🌙</button>
+
+<header class="hero">
+  <div class="badge"> <img src="تومه.png" alt="تومة" width="200px"> </div>
+  <br>
+  <h1>مطاعم تومة</h1>
+  <p> كشري × طواجن × فتة —  اكل مراث بشكل تراث </p>
+</header>
+
+<nav class="tabs">
+  <a href="#savings">منيو التوفير</a>
+  <a href="#koshary">الكشري</a>
+  <a href="#tawagen">الطواجن</a>
+  <a href="#fatta">الفتة</a>
+  <a href="#sweet">الحلو</a>
+  <a href="#extras">إضافات</a>
+  <a href="#drinks">مشروبات</a>
+  <a href="#branches">فروعنا</a>
+</nav>
+
+<main>
+<br>
+<br>
+  <section class="savings" id="savings">
+    <div class="section-title"><span class="bar"></span><h2>منيو التوفير</h2></div>
+    <div class="offer-grid">
+      <div class="offer-card">
+        <div class="name">توفير 1</div>
+        <div class="desc">كشري بلاس + بيج كولا</div>
+        <div class="price-row"><span class="now">45<sup> جنيه</sup></span><span class="was">50</span></div>
+      </div>
+      <div class="offer-card">
+        <div class="name">توفير 2</div>
+        <div class="desc">كشري بلاس + ارز بلبن </div>
+        <div class="price-row"><span class="now">50<sup> جنيه</sup></span><span class="was">60</span></div>
+      </div>
+      <div class="offer-card">
+        <div class="name">دويتو</div>
+        <div class="desc">٢ كشري بلاس + ٢ عيش + ٢ بيج كولا</div>
+        <div class="price-row"><span class="now">100<sup> جنيه</sup></span><span class="was">120</span></div>
+      </div>
+      <div class="offer-card">
+        <div class="name">دويتو بلاس</div>
+        <div class="desc">٢ كشري بلاس + ٢ عيش + ارز بلبن</div>
+        <div class="price-row"><span class="now">115<sup> جنيه</sup></span><span class="was">140</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="purple-zone" id="koshary-zone">
+
+    <div class="menu-group" id="koshary">
+      <div class="section-title"><span class="bar"></span><h2>كشري</h2></div>
+      <div class="item-row"><span class="iname">ميني تومة</span><span class="iprice">18</span></div>
+      <div class="item-row"><span class="iname">تومة</span><span class="iprice">25</span></div>
+      <div class="item-row"><span class="iname">تومة اسبشيال</span><span class="iprice">35</span></div>
+      <div class="item-row"><span class="iname">تومة بلاس</span><span class="iprice">40</span></div>
+      <div class="item-row"><span class="iname">تومة تربل</span><span class="iprice">45</span></div>
+      <div class="item-row"><span class="iname">تومة كوارتو</span><span class="iprice">60</span></div>
+      <div class="item-row"><span class="iname">تومة جراند</span><span class="iprice">65</span></div>
+    </div>
+
+    <div class="menu-group" id="tawagen">
+      <div class="section-title"><span class="bar"></span><h2>طواجن</h2></div>
+      <div class="item-row"><span class="iname">كازروله تشكن</span><span class="iprice">60</span></div>
+      <div class="item-row"><span class="iname">كازروله ميت</span><span class="iprice">55</span></div>
+      <div class="item-row"><span class="iname">كازروله سجق</span><span class="iprice">55</span></div>
+    </div>
+
+    <div class="menu-group" id="fatta">
+      <div class="section-title"><span class="bar"></span><h2>الفتة</h2></div>
+      <div class="item-row"><span class="iname">فتة كشري</span><span class="iprice">55</span></div>
+    </div>
+
+    <div class="menu-group" id="sweet">
+      <div class="section-title"><span class="bar"></span><h2>حلو</h2></div>
+      <div class="item-row"><span class="iname">أرز باللبن</span><span class="iprice">20</span></div>
+      <div class="item-row"><span class="iname">كريم كراميل</span><span class="iprice">20</span></div>
+    </div>
+
+    <div class="menu-group" id="extras">
+      <div class="section-title"><span class="bar"></span><h2>مقبلات وإضافات</h2></div>
+      <div class="item-row"><span class="iname">عيش تومة</span><span class="iprice">10</span></div>
+      <div class="item-row"><span class="iname">صلصة وسط</span><span class="iprice">10</span></div>
+      <div class="item-row"><span class="iname">علبة دقة وسط</span><span class="iprice">7</span></div>
+      <div class="item-row"><span class="iname">تومية </span><span class="iprice">3</span></div>
+      <div class="item-row"><span class="iname">تقلية </span><span class="iprice">10</span></div>
+      <div class="item-row"><span class="iname">صلصة فتة وسط </span><span class="iprice">10</span></div>
+      <div class="item-row"><span class="iname">حمص </span><span class="iprice">10</span></div>
+      <div class="item-row"><span class="iname">عدس </span><span class="iprice">10</span></div>
+    </div>
+
+    <div class="menu-group" id="drinks">
+      <div class="section-title"><span class="bar"></span><h2>مشروبات</h2></div>
+      <div class="item-row"><span class="iname">سلاش</span><span class="iprice">20</span></div>
+      <div class="item-row"><span class="iname">مياة معدنية صغيرة</span><span class="iprice">8</span></div>
+      <div class="item-row"><span class="iname">مياة معدنية كبيرة</span><span class="iprice">10</span></div>
+      <div class="item-row"><span class="iname">بيج كولا صغير</span><span class="iprice">10</span></div>
+      <div class="item-row"><span class="iname">في كولا كانز</span><span class="iprice">20</span></div>
+    </div>
+
+  </section>
+
+</main>
+
+<footer id="branches">
+  <div class="phone">19397</div>
+  <div>اتصل واطلب دلوقتي</div>
+  <div class="branches">
+    القاهرة (وسط البلد – ميدان التوفيقية) · المنصورة · طنطا · المحلة الكبرى . سمنود · الزقازيق
+  </div>
+  <div class="ig">@TonaEgypt</div>
+  <br>
+  <div class="ig">جميع الحقوق محفوظة شركة نيوكود</div>
+</footer>
+
+<script>
+  (function(){
+    var root = document.documentElement;
+    var btn = document.getElementById('themeToggle');
+
+    function render(theme){
+      root.setAttribute('data-theme', theme);
+      btn.textContent = theme === 'dark' ? '☀️' : '🌙';
+    }
+
+    render(root.getAttribute('data-theme') || 'light');
+
+    btn.addEventListener('click', function(){
+      var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      render(next);
+      try { localStorage.setItem('theme', next); } catch(e){}
+    });
+  })();
+</script>
+
+</body>
+</html>
