@@ -25,9 +25,9 @@
     --magenta:#9c1a6b;
     --magenta-dark:#7a1554;
     --ink:#241f1a;
-    --cream:#b308a4;
-    --card:#14e437;
-    --gold:#ff042e;
+    --cream:#7d0a52;
+    --card:#abd31b;
+    --gold:#ffffff;
 
     --hero-1:#b9d92e;
     --hero-2:#abd31b;
@@ -41,7 +41,7 @@
     --offer-name:#7a1554;
     --offer-desc:#302d26;
     --offer-was:#000000;
-    --offer-shadow:rgba(0,0,0,.7);
+    --offer-shadow:rgb(0, 0, 0);
     --zone-1:#9c1a6b;
     --zone-2:#7a1554;
     --footer-bg:#241f1a;
@@ -188,11 +188,35 @@
     position:relative;
   }
   .offer-card .name{font-weight:900;font-size:1.05rem;color:var(--offer-name);}
-  .offer-card .desc{font-size:.82rem;color:var(--offer-desc);margin:.3rem 0 .6rem;line-height:1.5;}
+  .offer-card .desc{font-size:.92rem;color:var(--offer-desc);margin:.1rem 0 .6rem;line-height:1.5;}
   .price-row{display:flex;align-items:baseline;gap:.5rem;}
   .price-row .now{font-size:1.5rem;font-weight:900;color:var(--gold);}
   .price-row .now sup{font-size:.7rem;}
   .price-row .was{font-size:.85rem;color:var(--offer-was);text-decoration:line-through;}
+
+  /* ===== صور كروت التوفير ===== */
+  .offer-img{
+    width:100%;
+    height:110px;
+    object-fit:cover;
+    border-radius:12px;
+    display:block;
+    margin-bottom:.6rem;
+    background:rgba(245, 243, 243, 0);
+  }
+
+  /* ===== صور الأقسام ===== */
+  .menu-img{
+    width:100%;
+    height:200px;
+    object-fit:cover;
+    border-radius:16px;
+    display:block;
+    margin-bottom:.9rem;
+    border:2px solid rgba(255, 255, 255, 0);
+    box-shadow:0 4px 12px rgba(0, 0, 0, 0);
+    background:rgba(255, 255, 255, 0);
+  }
 
   .purple-zone{
     background:linear-gradient(180deg, var(--zone-1) 0%, var(--zone-2) 100%);
@@ -279,7 +303,7 @@
   <div class="badge"> <img src="تومه.png" alt="تومة" width="200px"> </div>
   <br>
   <h1>مطاعم تومة</h1>
-  <p> كشري × طواجن × فتة -- اكل تراث بشكل كلاس  </p>
+  <p> كشري × طواجن × فتة —  اكل تراث بشكل كلاس </p>
 </header>
 
 <nav class="tabs">
@@ -300,23 +324,27 @@
     <div class="section-title"><span class="bar"></span><h2>منيو التوفير</h2></div>
     <div class="offer-grid">
       <div class="offer-card">
+        <img class="offer-img" src="Picsart_26-09-28_22-57-22-364.png" alt="توفير 1" onerror="this.style.display='none'">
         <div class="name">توفير 1</div>
         <div class="desc">كشري بلاس + بيج كولا</div>
         <div class="price-row"><span class="now">45<sup> جنيه</sup></span><span class="was">50</span></div>
       </div>
       <div class="offer-card">
+        <img class="offer-img" src="Picsart_26-09-28_22-57-11-494.png" alt="توفير 2" onerror="this.style.display='none'">
         <div class="name">توفير 2</div>
         <div class="desc">كشري بلاس + ارز بلبن </div>
         <div class="price-row"><span class="now">50<sup> جنيه</sup></span><span class="was">60</span></div>
       </div>
       <div class="offer-card">
+        <img class="offer-img" src="Picsart_26-09-28_22-57-31-036.png" alt="دويتو" onerror="this.style.display='none'">
         <div class="name">دويتو</div>
-        <div class="desc">٢ كشري بلاس + ٢ عيش + ٢ بيج كولا</div>
+        <div class="desc">2 كشري بلاس + 2 عيش + 2 بيج كولا</div>
         <div class="price-row"><span class="now">100<sup> جنيه</sup></span><span class="was">120</span></div>
       </div>
       <div class="offer-card">
+        <img class="offer-img" src="Picsart_26-09-28_22-57-37-175.png" alt="دويتو بلاس" onerror="this.style.display='none'">
         <div class="name">دويتو بلاس</div>
-        <div class="desc">٢ كشري بلاس + ٢ عيش + ارز بلبن</div>
+        <div class="desc">2 كشري بلاس + 2 عيش + 2 ارز بلبن</div>
         <div class="price-row"><span class="now">115<sup> جنيه</sup></span><span class="was">140</span></div>
       </div>
     </div>
@@ -325,6 +353,7 @@
   <section class="purple-zone" id="koshary-zone">
 
     <div class="menu-group" id="koshary">
+      <img class="menu-img" src="Picsart_26-09-28_23-03-26-441.png" alt="كشري" onerror="this.style.display='none'">
       <div class="section-title"><span class="bar"></span><h2>كشري</h2></div>
       <div class="item-row"><span class="iname">ميني تومة</span><span class="iprice">18</span></div>
       <div class="item-row"><span class="iname">تومة</span><span class="iprice">25</span></div>
@@ -336,6 +365,7 @@
     </div>
 
     <div class="menu-group" id="tawagen">
+      <img class="menu-img" src="Picsart_26-09-28_23-00-00-359.png" alt="طواجن" onerror="this.style.display='none'">
       <div class="section-title"><span class="bar"></span><h2>طواجن</h2></div>
       <div class="item-row"><span class="iname">كازروله تشكن</span><span class="iprice">60</span></div>
       <div class="item-row"><span class="iname">كازروله ميت</span><span class="iprice">55</span></div>
@@ -343,17 +373,20 @@
     </div>
 
     <div class="menu-group" id="fatta">
+      <img class="menu-img" src="Picsart_26-09-28_23-00-10-216.png" alt="الفتة" onerror="this.style.display='none'">
       <div class="section-title"><span class="bar"></span><h2>الفتة</h2></div>
       <div class="item-row"><span class="iname">فتة كشري</span><span class="iprice">55</span></div>
     </div>
 
     <div class="menu-group" id="sweet">
-      <div class="section-title"><span class="bar"></span><h2>حلو</h2></div>
+            <img class="menu-img" src="Picsart_26-09-28_23-00-20-997.png" alt="الحلو" onerror="this.style.display='none'">
+      <div class="section-title"  ><span class="bar"></span><h2>حلو</h2></div>
       <div class="item-row"><span class="iname">أرز باللبن</span><span class="iprice">20</span></div>
       <div class="item-row"><span class="iname">كريم كراميل</span><span class="iprice">20</span></div>
     </div>
 
     <div class="menu-group" id="extras">
+      <img class="menu-img" src="Picsart_26-09-28_23-03-32-620.png" alt="مقبلات وإضافات" onerror="this.style.display='none'">
       <div class="section-title"><span class="bar"></span><h2>مقبلات وإضافات</h2></div>
       <div class="item-row"><span class="iname">عيش تومة</span><span class="iprice">10</span></div>
       <div class="item-row"><span class="iname">صلصة وسط</span><span class="iprice">10</span></div>
@@ -366,6 +399,7 @@
     </div>
 
     <div class="menu-group" id="drinks">
+      <img class="menu-img" src="Picsart_26-09-28_23-00-26-411.png" alt="مشروبات" onerror="this.style.display='none'">
       <div class="section-title"><span class="bar"></span><h2>مشروبات</h2></div>
       <div class="item-row"><span class="iname">سلاش</span><span class="iprice">20</span></div>
       <div class="item-row"><span class="iname">مياة معدنية صغيرة</span><span class="iprice">8</span></div>
@@ -384,7 +418,7 @@
   <div class="branches">
     القاهرة (وسط البلد – ميدان التوفيقية) · المنصورة · طنطا · المحلة الكبرى . سمنود · الزقازيق
   </div>
-  <div class="ig">@TonaEgypt</div>
+  <div class="ig">@TomaEgypt</div>
   <br>
   <div class="ig">جميع الحقوق محفوظة شركة نيوكود</div>
 </footer>
